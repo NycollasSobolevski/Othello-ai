@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RbLWi1s2K7RPe1Z0W5KWML8v0AFk5OUnthU1orL/B1BYYZcWjT9UMyPf826TIB/Z23mEj3AohQLTPTgxG9gd3g==",
+  "dgSpecHash": "6xjfbKdo10zDjhCpbB/AvVdRilk7tCR7yUymU/HrGDp1B54+wOZFBT2cb68+dH2X4hf0VZCUvmPJDzcWgaPCzA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\disrct\\Desktop\\othello-ai\\TEST\\TEST.csproj",
+  "projectFilePath": "C:\\Users\\disrct\\Desktop\\Projeto\\Othello-ai\\TEST\\TEST.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
