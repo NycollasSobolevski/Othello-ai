@@ -6,7 +6,7 @@
 // //     Youplays = file == "m1"
 // // };
 
-// var files = Directory.GetFiles($"{gamePath}/");
+// var files = Directoryqs.GetFiles($"{gamePath}/");
 // var archive = files.Where(file => file.Contains(file)).FirstOrDefault();
 
 // var fileData = File.ReadLines(archive!).FirstOrDefault();
