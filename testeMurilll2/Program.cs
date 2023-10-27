@@ -27,22 +27,21 @@ if (tree.YouPlays)
     System.Console.WriteLine(last);
 }
 
-Player p1 = new();
-Player p2 = new();
+Game p1 = new();
+Game p2 = new();
 
-p1.CurrentPlays = 68_853_694_464;
+p1.CurrentPlays = 68_464;
 p1.Enemy = p2;
 
 System.Console.WriteLine(p1.Play(1,2));
 
 while (true)
 {
-
-    // if (!File.Exists($"{file} last.txt"))
-    //     continue;
+    if (!File.Exists($"{file} last.txt"))
+        continue;
     
-    var text = File.ReadAllText($"m1.txt");
-    // File.Delete($"{file} last.txt");
+    var text = File.ReadAllText(FilePath);
+    File.Delete($"{file} last.txt");
 
     var data = text.Split(" ");
     var whiteCount = int.Parse(data[0]);
@@ -51,9 +50,7 @@ while (true)
     var blackInfo = int.Parse(data[3]);
     var whitePlays = int.Parse(data[4]);
 
-    break;
-
-    tree = tree.Play(67);
+    tree = tree.Play(6, 7);
     tree.Expand(deep);
 
     tree.Alphabeta();
@@ -62,5 +59,6 @@ while (true)
 
     var last = tree.State.GetLast();
     
-    File.WriteAllText($"m1.txt", $"{last.board} {last.position}");
+    // TODO passar em binario
+    File.WriteAllText($"m1.txt", $"{last.row} {last.column}");
 }
