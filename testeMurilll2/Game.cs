@@ -4,13 +4,18 @@ using System.Collections.Generic;
 public class Game
 {
     public ulong CurrentPlays { get; set; }
-    public Player Enemy { get; set; }
+    public Game Enemy { get; set; }
 
-    int boards = 0;
     int lastColumn = 0;
     int lastRow = 0;
     bool[] data;
     byte[] sums;
+
+    public Game()
+    {      
+        data = new bool[63];
+        sums = new byte[63];
+    }
 
     public (int column, int row) GetLast()
         => (lastColumn, lastRow);
@@ -74,17 +79,14 @@ public class Game
     {
         var clone = this.Clone();
 
-        if (!CanPlay(1,1))
+        for (int p = 0; p < 3; p++)
+        {
+            if (data[p])
+                continue;
 
-            for (int p = 0; p < 9; p++)
-            {
-                if (data[2 * 9 + p])
-                    continue;
-
-                clone.Play(2,2);
-                yield return clone;
-                clone = this.Clone();
-            }
-
+            clone.Play(1, p);
+            yield return clone;
+            clone = this.Clone();
+        }
     }
 }

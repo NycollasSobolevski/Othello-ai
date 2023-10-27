@@ -85,8 +85,8 @@ public class Node
 
     private float aval()
     {
-        // if (State.GameEnded())
-        //     return YouPlays ? float.PositiveInfinity : float.NegativeInfinity;
+        if (State.GameEnded())
+            return YouPlays ? float.PositiveInfinity : float.NegativeInfinity;
         
         return Random.Shared.NextSingle();
     }
