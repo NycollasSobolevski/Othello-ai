@@ -14,7 +14,7 @@ public class Player
         row --;
         int objectivePosition = (width * column) + row;
         ulong binResult = CurrentPlays >>> objectivePosition;
-
+        ulong constant = 1;
         bool top    = Enemy.HavePiece(column, row - 1);
         bool bottom = Enemy.HavePiece(column, row + 1);
         bool left   = Enemy.HavePiece(column-1, row);
@@ -31,10 +31,10 @@ public class Player
                 top = Enemy.HavePiece(column, row -1 -qtd);
                 qtd++;
             }
-            System.Console.WriteLine($"Top possibles move {qtd}");
-            // CurrentPlays + (ulong)(1 << objectivePosition) //movendo 1 
-            PossibleMoves.Add(CurrentPlays + (ulong)(1 << (width * column) + (row -qtd)));
+
+            ulong _move = CurrentPlays + (constant << (width * column) + (row -qtd));
             
+            PossibleMoves.Add(_move);
         }
         if (bottom)
         {
@@ -43,9 +43,8 @@ public class Player
                 bottom = Enemy.HavePiece(column, row +1 +qtd);
                 qtd++;
             }
-            System.Console.WriteLine($"Bottom possibles move {qtd}");
-            ulong move = CurrentPlays + (ulong)(1 << (width * column) + row + qtd);
-            PossibleMoves.Add(move);
+            ulong _move = CurrentPlays + (constant << (width * column) + row + qtd);
+            PossibleMoves.Add(_move);
         }
         if (right)
         {
@@ -54,19 +53,62 @@ public class Player
                 right = Enemy.HavePiece(column +1 +qtd, row );
                 qtd++;
             }
-            System.Console.WriteLine($"Right possibles move {qtd}");
-            PossibleMoves.Add(CurrentPlays + (ulong)(1 << (width * (column + 1)) + row));
+            ulong _move = CurrentPlays + (constant << (width * (column  + qtd) + row));
+
+            PossibleMoves.Add(_move);
         }
         if (left)
         {
             int qtd = 0;
             while(left){
-                left = Enemy.HavePiece(column -1 -qtd, row );
+                left = Enemy.HavePiece(column -qtd, row );
                 qtd++;
             }
-            System.Console.WriteLine($"Left possibles move {qtd}");
-            PossibleMoves.Add(CurrentPlays + (ulong)(1 << (width * (column - 1)) + row));
+            PossibleMoves.Add(CurrentPlays + (constant << (width * (column - 1 -qtd)) + row));
         }
+        if(Diag1){
+            int qtd = 0;
+            while (Diag1){
+                Diag1 = Enemy.HavePiece(column -1 -qtd, row -1 -qtd);
+                qtd++;
+            }
+            int sla = width * (column -qtd) + (row -qtd);
+            ulong _move = CurrentPlays + (constant << sla);
+            PossibleMoves.Add(_move);
+            // Console.WriteLine($"Diagonal 01 = {_move}");
+        }
+        if(Diag2){
+            int qtd = 0;
+            while (Diag2){
+                Diag2 = Enemy.HavePiece(column +1 +qtd, row -1 -qtd);
+                qtd++;
+            }
+            ulong _move = CurrentPlays + (constant << (width * (column +qtd) + (row -qtd)));
+            PossibleMoves.Add(_move);
+            // Console.WriteLine($"Diagonal 02 = {_move}");
+        }
+        if(Diag3){
+            int qtd = 0;
+            while (Diag3){
+                Diag3 = Enemy.HavePiece(column -1 -qtd, row +1 +qtd);
+                qtd++;
+            }
+            ulong _move = CurrentPlays + (constant << (width * (column -qtd) + row +qtd));
+            PossibleMoves.Add(_move);
+            // Console.WriteLine($"Diagonal 03 = {_move}");
+        }
+        if(Diag4){
+            int qtd = 0;
+            while (Diag4){
+                Diag4 = Enemy.HavePiece(column +1 +qtd, row +1 +qtd);
+                qtd++;
+            }
+            ulong _move = CurrentPlays + (constant << (width * (column +qtd) +row +qtd));
+            PossibleMoves.Add(_move);
+            // Console.WriteLine($"Diagonal 04 = {_move}");
+        }
+        
+        
         return possibleResults;
     } 
 
@@ -89,7 +131,7 @@ public class Player
             if(index){
                 int x = (i / 8) + 1;
                 int y = (i % 8) + 1;
-                System.Console.WriteLine($"------Peça {i} x:{x}, y:{y}");
+                // System.Console.WriteLine($"------Peça {i} x:{x}, y:{y}");
                 Plays(y,x);
             }
         }

@@ -46,16 +46,22 @@ Player p1 = new();
 Player p2 = new();
 
 p1.CurrentPlays = 68_853_694_464;
-p2.CurrentPlays = 35_165_044_736;
+p2.CurrentPlays = 52346224640;
 p1.Enemy = p2;
 p2.Enemy = p1;
 // System.Console.WriteLine(p1.Play(4,4));
 p1.SearchPiece();
-System.Console.WriteLine("===========");
+System.Console.WriteLine("====================== Player 1 ======================");
 p2.SearchPiece();
 // 100000110000000000000000000000000000
 
 foreach (var move in p1.PossibleMoves)
+{
+    System.Console.WriteLine(move);   
+}
+System.Console.WriteLine("====================== Player 2 ======================");
+
+foreach (var move in p2.PossibleMoves)
 {
     System.Console.WriteLine(move);   
 }
